@@ -5,8 +5,8 @@
 // 5. when i click the hit first and then double the second image is not showing
 
 /*----- constants -----*/
-const player = "hasan";
-const computer = "dealer";
+const player = "HASAN";
+const computer = "DEALER";
 
 /*----- app's state (variables) -----*/
 let cards = [
@@ -71,16 +71,23 @@ function doubleHandle() {
   randomCard2 = cards[randomNum2];
   arrayCard.push(randomCard2);
   imgFlipped.className = `card large flipped ${arrayCard[0]}`;
-  newImg.className = `card large flipped ${arrayCard[1]}`;
-  blackImagesEl.append(newImg);
-  blackImagesEl.style.display = "flex";
-  blackImagesEl.style.justifyContent = "center";
-  blackImagesEl.style.flexWrap = "wrap";
+  for (let i = 0; i < arrayCard.length; i++) {
+    newImg.className = `card large flipped ${i}`;
+    blackImagesEl.append(i);
+    blackImagesEl.style.display = "flex";
+    blackImagesEl.style.justifyContent = "center";
+    blackImagesEl.style.flexWrap = "wrap";
+  }
+
   countCheck();
 }
 function standHandle() {
   computerTurn();
+  winningCheckComp();
   checkingWinner();
+  hitEl.disabled = true;
+  doubleEl.disabled = true;
+  standEl.disabled = true;
 }
 function restartHandle() {
   h2El.textContent = "";
@@ -90,6 +97,9 @@ function restartHandle() {
   doubleEl.disabled = false;
   standEl.disabled = false;
   count = 0;
+  h2El2.textContent = "";
+  element.textContent = "";
+  pEl2.textContent = "";
 }
 
 function countCheck() {
@@ -144,12 +154,12 @@ function winningCheck() {
     h2El.textContent = `Congratulation ${player} Won!`;
     hitEl.disabled = true;
     doubleEl.disabled = true;
-    // standEl.disabled = true;
+    standEl.disabled = true;
   } else if (count > 21) {
     h2El.textContent = `You lost the game`;
     hitEl.disabled = true;
     doubleEl.disabled = true;
-    // standEl.disabled = true;
+    standEl.disabled = true;
   }
   return count;
 }
@@ -158,44 +168,34 @@ function computerTurn() {
   randomCard = cards[randomNum];
   if (randomCard === "dA") {
     compCount += 11;
-    pEl2.textContent = `Counting: ${compCount}`;
   } else if (randomCard === "dQ") {
     compCount += 10;
-    pEl2.textContent = `Counting: ${compCount}`;
   } else if (randomCard == "d02") {
     compCount += 2;
-    pEl2.textContent = `Counting: ${compCount}`;
   } else if (randomCard === "d03") {
     compCount += 3;
-    pEl2.textContent = `Counting: ${compCount}`;
   } else if (randomCard === "d04") {
     compCount += 4;
-    pEl2.textContent = `Counting: ${compCount}`;
   } else if (randomCard === "d05") {
     compCount += 5;
-    pEl2.textContent = `Counting: ${compCount}`;
   } else if (randomCard === "d06") {
     compCount += 6;
-    pEl2.textContent = `Counting: ${compCount}`;
   } else if (randomCard === "d07") {
     compCount += 7;
-    pEl2.textContent = `Counting: ${compCount}`;
   } else if (randomCard === "d8") {
     compCount += 8;
-    pEl2.textContent = `Counting: ${compCount}`;
   } else if (randomCard === "d09") {
     compCount += 9;
-    pEl2.textContent = `Counting: ${compCount}`;
   } else if (randomCard === "d10") {
     compCount += 10;
-    pEl2.textContent = `Counting: ${compCount}`;
   } else if (randomCard === "dK") {
     compCount += 10;
-    pEl2.textContent = `Counting: ${compCount}`;
   } else if (randomCard === "dJ") {
     compCount += 10;
-    pEl2.textContent = `Counting: ${compCount}`;
   }
+  pEl2.style.fontSize = "22px";
+  pEl2.style.color = "white";
+  return (pEl2.textContent = `The ${computer} has ${compCount}`);
 }
 
 function winningCheckComp() {
@@ -204,7 +204,7 @@ function winningCheckComp() {
     hitEl.disabled = true;
     doubleEl.disabled = true;
     standEl.disabled = true;
-  } else if (compCount > 21) {
+  } else if (compCount > 17) {
     h2El2.textContent = `You lost the game`;
     hitEl.disabled = true;
     doubleEl.disabled = true;
@@ -212,13 +212,17 @@ function winningCheckComp() {
   }
   return compCount;
 }
+let element = document.createElement("h2");
+element.style.textAlign = "center";
+element.style.color = "blue";
+element.style.marginBottom = "10px";
+element.style.fontSize = "27px";
 
 function checkingWinner() {
-  let element = document.createElement("h2");
   if (count > compCount) {
-    element.textContent = `Player WINS!`;
+    element.textContent = `${player} WINS!`;
   } else {
-    element.textContent = `Computer Wins!`;
+    element.textContent = `${computer} Wins!`;
   }
   leadEl.append(element);
 }
