@@ -1,5 +1,3 @@
-// I cant make the doubleHandle be hitHandle have different cut on checkingAmount
-//
 /*----- constants -----*/
 
 const player = {
