@@ -10,7 +10,7 @@ The players at a blackjack table do not play against each other, they play again
 
 ## Play the game
 
-[Link](https://magnificent-lebkuchen-98452f.netlify.app/){target="_blank"}
+[Screenshot](https://magnificent-lebkuchen-98452f.netlify.app/){target="_blank"}
 
 ## Technologies Used
 
