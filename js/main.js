@@ -1,11 +1,11 @@
-// questions: 1. restart button when i click the second image is being removed
-// 2. double when i click the first time is giving 2 imges bt the rest gives me one item
-// 3. wh
-// 4. Ace it appears first time is 11 the rest 1.. how to do that
-// 5. when i click the hit first and then double the second image is not showing
-
+// I cant make the doubleHandle be hitHandle have different cut on checkingAmount
+//
 /*----- constants -----*/
-const player = "HASAN";
+
+const player = {
+  name: "Hasan",
+  amount: 230,
+};
 const computer = "DEALER";
 
 /*----- app's state (variables) -----*/
@@ -30,10 +30,13 @@ let randomNum;
 let arrayCard = [];
 let randomCard;
 let randomCard2;
-console.log(randomNum);
+let firstImg = document.createElement("img");
+let newImg = document.createElement("img");
+let double = false;
+let hit = false;
 
 /*----- cached element references -----*/
-
+let playerAmount = document.querySelector(".player-amount");
 let hitEl = document.querySelector(".hit");
 let doubleEl = document.querySelector(".double");
 let standEl = document.querySelector(".stand");
@@ -56,30 +59,39 @@ restartEl.addEventListener("click", restartHandle);
 
 /*----- functions -----*/
 function hitHandle() {
-  randomNum = Math.floor(Math.random() * cards.length);
-  randomCard = cards[randomNum];
-  imgFlipped.className = `card large flipped ${randomCard}`;
-  countCheck();
-}
-
-function doubleHandle() {
+  imgFlipped.style.display = "block";
+  firstImg.remove();
+  newImg.remove();
+  randomCard2 = 0;
   randomNum = Math.floor(Math.random() * cards.length);
   randomCard = cards[randomNum];
   arrayCard.push(randomCard);
-  let newImg = document.createElement("img");
+  imgFlipped.className = `card large flipped ${randomCard}`;
+  countCheck();
+  hit = true;
+  checkingAmount();
+}
+
+function doubleHandle() {
+  firstImg.style.display = "block";
+  newImg.style.display = "block";
+  randomNum = Math.floor(Math.random() * cards.length);
+  randomCard = cards[randomNum];
+  arrayCard.push(randomCard);
   let randomNum2 = Math.floor(Math.random() * cards.length);
   randomCard2 = cards[randomNum2];
   arrayCard.push(randomCard2);
-  imgFlipped.className = `card large flipped ${arrayCard[0]}`;
-  for (let i = 0; i < arrayCard.length; i++) {
-    newImg.className = `card large flipped ${i}`;
-    blackImagesEl.append(i);
-    blackImagesEl.style.display = "flex";
-    blackImagesEl.style.justifyContent = "center";
-    blackImagesEl.style.flexWrap = "wrap";
-  }
-
+  firstImg.className = `card large flipped ${randomCard}`;
+  newImg.className = `card large flipped ${randomCard2}`;
+  blackImagesEl.append(firstImg);
+  blackImagesEl.append(newImg);
+  blackImagesEl.style.display = "flex";
+  blackImagesEl.style.justifyContent = "center";
+  blackImagesEl.style.flexWrap = "wrap";
+  imgFlipped.style.display = "none";
   countCheck();
+  double = true;
+  checkingAmount();
 }
 function standHandle() {
   computerTurn();
@@ -90,20 +102,27 @@ function standHandle() {
   standEl.disabled = true;
 }
 function restartHandle() {
+  count = 0;
   h2El.textContent = "";
   pEl.textContent = "Counting: 0";
+  arrayCard = [];
+  firstImg.remove();
+  newImg.remove();
+  imgFlipped.style.display = "block";
   imgFlipped.className = `card large flipped back-blue`;
+
   hitEl.disabled = false;
   doubleEl.disabled = false;
   standEl.disabled = false;
-  count = 0;
+
   h2El2.textContent = "";
   element.textContent = "";
   pEl2.textContent = "";
 }
 
 function countCheck() {
-  arrayCard = [randomCard, randomCard2];
+  // arrayCard = [randomCard, randomCard2];
+  count = 0;
   for (let i = 0; i < arrayCard.length; i++) {
     if (arrayCard[i] === "dA") {
       count += 11;
@@ -151,7 +170,9 @@ function countCheck() {
 // my winning check is not working
 function winningCheck() {
   if (count === 21) {
-    h2El.textContent = `Congratulation ${player} Won!`;
+    h2El.textContent = `Congratulation ${player.name} Won!`;
+    player.amount = player.amount + 50;
+    playerAmount.textContent = `The remaining amount is ${player.amount}`;
     hitEl.disabled = true;
     doubleEl.disabled = true;
     standEl.disabled = true;
@@ -161,7 +182,7 @@ function winningCheck() {
     doubleEl.disabled = true;
     standEl.disabled = true;
   }
-  return count;
+  // return count;
 }
 function computerTurn() {
   randomNum = Math.floor(Math.random() * cards.length);
@@ -220,9 +241,38 @@ element.style.fontSize = "27px";
 
 function checkingWinner() {
   if (count > compCount) {
-    element.textContent = `${player} WINS!`;
+    element.textContent = `${player.name} WINS!`;
+    player.amount = player.amount + 50;
+    playerAmount.textContent = `The remaining amount is ${player.amount}`;
   } else {
     element.textContent = `${computer} Wins!`;
   }
   leadEl.append(element);
+}
+
+function checkingAmount() {
+  if (double) {
+    player.amount = player.amount - 20;
+    playerAmount.textContent = `The remaining amount is ${player.amount}`;
+    if (player.amount <= 0) {
+      hitEl.disabled = true;
+      doubleEl.disabled = true;
+      standEl.disabled = true;
+      restartEl.disabled = true;
+      playerAmount.textContent = `YOU CANNOT PLAY ANYMORE. GO REFUND!`;
+    }
+  } else if (hit) {
+    console.log("I am in hit");
+    player.amount = player.amount - 10;
+    playerAmount.textContent = `The remaining amount is ${player.amount}`;
+    if (player.amount <= 0) {
+      hitEl.disabled = true;
+      doubleEl.disabled = true;
+      standEl.disabled = true;
+      restartEl.disabled = true;
+      playerAmount.textContent = `YOU CANNOT PLAY ANYMORE. GO REFUND!`;
+    }
+  }
+  hit = false;
+  double = false;
 }
