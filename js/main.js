@@ -165,7 +165,6 @@ function countCheck() {
     winningCheck();
   }
 }
-// my winning check is not working
 function winningCheck() {
   if (count === 21) {
     h2El.textContent = `Congratulation ${player.name} Won!`;
@@ -180,7 +179,6 @@ function winningCheck() {
     doubleEl.disabled = true;
     standEl.disabled = true;
   }
-  // return count;
 }
 function computerTurn() {
   randomNum = Math.floor(Math.random() * cards.length);
