@@ -7,10 +7,10 @@ The players at a blackjack table do not play against each other, they play again
 ## Screenshots
 
 ![Main Screen](card_deck-css/images/Screenshot 2022-11-09-154907.png)
+![Winning Screen](card_deck-css/images/Winning Screen.png)
 
 ## Play the game
-
-[Screenshot](https://magnificent-lebkuchen-98452f.netlify.app/){target="_blank"}
+You can play the game using the link (https://hasanabdirahman.github.io/Blackjack-Game/){target="_blank"}
 
 ## Technologies Used
 
@@ -22,5 +22,6 @@ The players at a blackjack table do not play against each other, they play again
 
 - **Add A backend**
   - I would love to store the data in a database eg MongoDB.
+  - Add sound effect when winning
   
 
