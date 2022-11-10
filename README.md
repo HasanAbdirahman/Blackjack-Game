@@ -6,7 +6,7 @@ The players at a blackjack table do not play against each other, they play again
 
 ## Screenshots
 
-![Main Screen](card_deck-css/images/Screenshot 2022-11-09-154907.png)
+![Main Screen](https://github.com/HasanAbdirahman/Blackjack-Game/blob/main/card-deck-css/images/Screenshot%202022-11-09%20154907.png?raw=true)
 ![Winning Screen](card_deck-css/images/Winning Screen.png)
 
 ## Play the game
