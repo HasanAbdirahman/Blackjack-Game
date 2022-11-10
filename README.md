@@ -10,7 +10,7 @@ The players at a blackjack table do not play against each other, they play again
 ![Winning Screen](card_deck-css/images/Winning Screen.png)
 
 ## Play the game
-You can play the game using the link (https://hasanabdirahman.github.io/Blackjack-Game/){target="_blank"}
+You can play the game using the link [here](https://hasanabdirahman.github.io/Blackjack-Game/){target="_blank"}. Enjoy the game.
 
 ## Technologies Used
 
