@@ -2,7 +2,7 @@
 
 const player = {
   name: "Hasan",
-  amount: 230,
+  amount: 120,
 };
 const computer = "DEALER";
 
@@ -146,7 +146,7 @@ function countCheck() {
     } else if (arrayCard[i] === "d07") {
       count += 7;
       pEl.textContent = `Counting: ${count}`;
-    } else if (arrayCard[i] === "d8") {
+    } else if (arrayCard[i] === "d08") {
       count += 8;
       pEl.textContent = `Counting: ${count}`;
     } else if (arrayCard[i] === "d09") {
